@@ -71,7 +71,7 @@ export async function getPageData({ slug, locale, preview }) {
           }
         }
         query GetPages(
-          $slug: String!
+          $slug: String
           $publicationState: PublicationState!
           $locale: I18NLocaleCode!
         ) {        
@@ -239,7 +239,7 @@ export async function getPageData({ slug, locale, preview }) {
         }      
       `,
       variables: {
-        slug,
+        slug: slug === "" ? null : slug,
         publicationState: preview ? "PREVIEW" : "LIVE",
         locale,
       },

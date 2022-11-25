@@ -1,11 +1,6 @@
 {
-  "extends": [
-    "next",
-    "prettier"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["next/babel", "next", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": [
       "error",
