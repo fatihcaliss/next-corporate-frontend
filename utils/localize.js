@@ -10,14 +10,15 @@ export async function getLocalizedPage(targetLocale, pageContext) {
 
 export function localizePath(page) {
   const { locale, defaultLocale, slug } = page
+  const tempSlug = slug === null ? "" : slug
 
   if (locale === defaultLocale) {
     // The default locale is not prefixed
-    return `/${slug}`
+    return `/${tempSlug}`
   }
 
   // The slug should have a localePrefix
-  return `/${locale}/${slug}`
+  return `/${locale}/${tempSlug}`
 }
 
 export function getLocalizedPaths(page) {

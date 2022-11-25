@@ -14,38 +14,44 @@ const MyApp = ({ Component, pageProps }) => {
     return <ErrorPage statusCode={404} />
   }
 
-  const { metadata, favicon, metaTitleSuffix } = global.attributes
+  const { metadata, favicon, metaTitleSuffix } = global?.attributes || {}
 
   return (
     <>
       {/* Favicon */}
       <Head>
-        <link
-          rel="shortcut icon"
-          href={getStrapiMedia(favicon.data.attributes.url)}
-        />
+        {favicon && (
+          <link
+            rel="shortcut icon"
+            href={getStrapiMedia(favicon?.data?.attributes?.url)}
+          />
+        )}
       </Head>
       {/* Global site metadata */}
-      <DefaultSeo
-        titleTemplate={`%s | ${metaTitleSuffix}`}
-        title="Page"
-        description={metadata.metaDescription}
-        openGraph={{
-          images: Object.values(
-            metadata.shareImage.data.attributes.formats
-          ).map((image) => {
-            return {
-              url: getStrapiMedia(image.url),
-              width: image.width,
-              height: image.height,
-            }
-          }),
-        }}
-        twitter={{
-          cardType: metadata.twitterCardType,
-          handle: metadata.twitterUsername,
-        }}
-      />
+      {metadata && (
+        <DefaultSeo
+          titleTemplate={`%s | ${metaTitleSuffix}`}
+          title="Page"
+          description={metadata.metaDescription}
+          {...(metadata.shareImage.data && {
+            openGraph: {
+              images: Object.values(
+                metadata.shareImage.data?.attributes.formats
+              ).map((image) => {
+                return {
+                  url: getStrapiMedia(image.url),
+                  width: image.width,
+                  height: image.height,
+                }
+              }),
+            },
+          })}
+          twitter={{
+            cardType: metadata.twitterCardType,
+            handle: metadata.twitterUsername,
+          }}
+        />
+      )}
       {/* Display the content */}
       <Component {...pageProps} />
     </>

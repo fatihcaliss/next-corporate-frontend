@@ -72,7 +72,7 @@ const LocaleSwitch = ({ pageContext }) => {
       <div
         className={`w-full bg-white p-1 mt-1 shadow-lg rounded-md ${
           showing ? "absolute" : "hidden"
-        }`}
+        }z-10`}
       >
         {pageContext.localizedPaths &&
           pageContext.localizedPaths.map(({ href, locale }) => {
@@ -86,7 +86,7 @@ const LocaleSwitch = ({ pageContext }) => {
               >
                 <p
                   onClick={() => handleLocaleChange(locale)}
-                  className="capitalize hover:bg-primary-50 hover:text-primary-600  cursor-pointer p-2 rounded-md text-center hover:text-primary-600"
+                  className="capitalize hover:bg-primary-50 hover:text-primary-600  cursor-pointer p-2 rounded-md text-center"
                 >
                   {locale}
                 </p>
