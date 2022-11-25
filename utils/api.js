@@ -232,6 +232,19 @@ export async function getPageData({ slug, locale, preview }) {
                     }
                     title
                   }
+                  ... on ComponentSectionsFrequentlyAskedQuestions {
+                    id
+                    headTitle
+                    title
+                    picture {
+                        ...FileParts
+                    }
+                    questions {
+                      id
+                      title
+                      description
+                    }
+                  }
                 }
               }
             }
